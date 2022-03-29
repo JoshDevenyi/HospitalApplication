@@ -1,0 +1,15 @@
+﻿@model HospitalApplication.Models.PatientDto
+
+@{
+    ViewBag.Title = "Details";
+}
+<div>
+    <a href="/Patient/Edit/@Model.PatientId">Update Patient</a>
+    <a href="/Patient/List">Return to Patient List</a>
+</div>
+<h2> @Model.PatientFirstName @Model.PatientLastName</h2>
+<p><strong>Phone:</strong> @Model.PatientPhone</p>
+<p><strong>Email:</strong> @Model.PatientEmail</p>
+
+<a style="color:red;" href="/Patient/DeleteConfirm/@Model.PatientId">Delete Patient</a>
+

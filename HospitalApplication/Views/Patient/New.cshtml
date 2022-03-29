@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "New";
+}
+
+<a href="/Patient/List">Return to Patient List</a>
+<h2>Create New Patient</h2>
+<form action="/Patient/Create" method="POST">
+    <div>
+        <label>First Name:</label>
+        <input type="text" name="PatientFirstName" />
+    </div>
+    <div>
+        <label>Last Name:</label>
+        <input type="text" name="PatientLastName" />
+    </div>
+    <div>
+        <label>Phone Number:</label>
+        <input type="text" name="PatientPhone" />
+    </div>
+    <div>
+        <label>Email:</label>
+        <input type="text" name="PatientEmail" />
+    </div>
+    <div>
+        <input type="submit" value="Add Patient" />
+    </div>
+
+</form>
+

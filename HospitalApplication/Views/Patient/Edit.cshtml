@@ -1,0 +1,42 @@
+﻿@model HospitalApplication.Models.PatientDto
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Update @Model.PatientFirstName @Model.PatientLastName</h2>
+
+<div>
+    <a href="/Patient/Details/@Model.PatientId">Go Back to @Model.PatientFirstName @Model.PatientLastName</a>
+</div>
+
+<form action="/Patient/Update/@Model.PatientId" method="POST">
+
+    <div style="display:none;">
+        <input type="number" name="PatientId" value="@Model.PatientId" />
+    </div>
+
+    <div>
+        <label>First Name: </label>
+        <input type="text" name="PatientFirstName" value="@Model.PatientFirstName" />
+    </div>
+
+    <div>
+        <label>Last Name: </label>
+        <input type="text" name="PatientLastName" value="@Model.PatientLastName" />
+    </div>
+
+    <div>
+        <label>Phone Number: </label>
+        <input type="tel" name="PatientPhone" value="@Model.PatientPhone" />
+    </div>
+
+    <div>
+        <label>Email Address: </label>
+        <input type="email" name="PatientEmail" value="@Model.PatientEmail" />
+    </div>
+
+    <div>
+        <input type="submit" value="Update Patient" />
+    </div>
+
+</form>
