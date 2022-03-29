@@ -1,0 +1,53 @@
+﻿@model HospitalApplication.Models.DoctorDto
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<div>
+    <a href="/Doctor/Details/@Model.DoctorId">Go Back to @Model.DoctorFirstName @Model.DoctorLastName</a>
+</div>
+
+<form action="/Doctor/Update/@Model.DoctorId" method="POST">
+
+    <div style="display:none;">
+        <input type="number" name="DoctorId" value="@Model.DoctorId" />
+    </div>
+
+    <div>
+        <label>First Name: </label>
+        <input type="text" name="DoctorFirstName" value="@Model.DoctorFirstName" />
+    </div>
+
+    <div>
+        <label>Last Name: </label>
+        <input type="text" name="DoctorLastName" value="@Model.DoctorLastName" />
+    </div>
+
+    <div>
+        <label>Staff Number: </label>
+        <input type="number" name="StaffNumber" value="@Model.StaffNumber" />
+    </div>
+
+    <div>
+        <label>Department: </label>
+        <input type="text" name="Department" value="@Model.Department" />
+    </div>
+
+    <div>
+        <label>Phone Number: </label>
+        <input type="tel" name="DoctorPhone" value="@Model.DoctorPhone" />
+    </div>
+
+    <div>
+        <label>Email Address: </label>
+        <input type="email" name="DoctorEmail" value="@Model.DoctorEmail" />
+    </div>
+
+    <div>
+        <input type="submit" value="Update Doctor" />
+    </div>
+
+</form>
