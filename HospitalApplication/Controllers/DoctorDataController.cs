@@ -120,8 +120,11 @@ namespace HospitalApplication.Controllers
         // DELETE: api/DoctorData/DeleteDoctor/5
         [ResponseType(typeof(Doctor))]
         [HttpPost]
-        public IHttpActionResult Delete(int id)
+        public IHttpActionResult DeleteDoctor(int id)
         {
+            //Debug.WriteLine("The ID is: ");
+            //Debug.WriteLine(id);
+
             Doctor doctor = db.Doctors.Find(id);
             if (doctor == null)
             {
@@ -143,7 +146,6 @@ namespace HospitalApplication.Controllers
             }
             base.Dispose(disposing);
         }
-
 
         private bool DoctorExists(int id)
         {
