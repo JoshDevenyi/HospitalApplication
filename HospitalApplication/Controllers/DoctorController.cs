@@ -42,11 +42,12 @@ namespace HospitalApplication.Controllers
             return View(doctors);
         }
 
+
         // GET: Doctor/Details/5
         public ActionResult Details(int id)
         {
             //objective: communicate with doctor data api to retrieve one doctor
-            //curl https://localhost:44353/api/doctordata/finddoctors/{id}
+            //curl https://localhost:44353/api/doctordata/finddoctor/{id}
 
             string url = "finddoctor/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
@@ -76,13 +77,11 @@ namespace HospitalApplication.Controllers
             return View();
         }
 
+
         // POST: Doctor/Create
         [HttpPost]
         public ActionResult Create(Doctor doctor)
         {
-            //Objective: Add new doctor into the system using the API
-            //curl -H "Content-Type:application/json" -d @doctor.json https://localhost:44353/api/doctordata/finddoctors/{id}
-
             string url = "adddoctor";
 
             string jsonpayload = jss.Serialize(doctor);
@@ -171,9 +170,9 @@ namespace HospitalApplication.Controllers
             content.Headers.ContentType.MediaType = "application/json"; //Specifies that we are sending JSON information as part of the payload
             HttpResponseMessage response = client.PostAsync(url, content).Result;
 
-            Debug.WriteLine(id);
-            Debug.WriteLine(response);
-            Debug.WriteLine(response.IsSuccessStatusCode);
+            //Debug.WriteLine(id);
+            //Debug.WriteLine(response);
+            //Debug.WriteLine(response.IsSuccessStatusCode);
 
             //Checking that response was successful
             if (response.IsSuccessStatusCode)

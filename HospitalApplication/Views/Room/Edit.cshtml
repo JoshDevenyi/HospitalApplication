@@ -1,0 +1,40 @@
+﻿@model HospitalApplication.Models.RoomDto
+
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Update Room @Model.RoomNumber?</h2>
+
+<form action="/Room/Update/@Model.RoomId" method="POST">
+
+    <div style="display:none;">
+        <input type="number" name="RoomId" value="@Model.RoomId" />
+    </div>
+
+    <div>
+        <label>Purpose: </label>
+        <input type="text" name="RoomPurpose" value="@Model.RoomPurpose" />
+    </div>
+
+    <div>
+        <label>Room Number: </label>
+        <input type="number" name="RoomNumber" value="@Model.RoomNumber" />
+    </div>
+
+    <div>
+        <label>Floor: </label>
+        <input type="number" name="Floor" value="@Model.Floor"/>
+    </div>
+
+    <div>
+        <label>Building: </label>
+        <input type="text" name="Building" value="@Model.Building"/>
+    </div>
+
+    <div>
+        <input type="submit" value="Update Room" />
+    </div> 
+
+</form>

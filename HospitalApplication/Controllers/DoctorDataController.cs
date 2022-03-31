@@ -122,8 +122,6 @@ namespace HospitalApplication.Controllers
         [HttpPost]
         public IHttpActionResult DeleteDoctor(int id)
         {
-            //Debug.WriteLine("The ID is: ");
-            //Debug.WriteLine(id);
 
             Doctor doctor = db.Doctors.Find(id);
             if (doctor == null)

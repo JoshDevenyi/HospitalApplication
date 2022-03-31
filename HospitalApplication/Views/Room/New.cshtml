@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "New";
+}
+
+<a href="/Room/List">Go back to list</a>
+
+
+<form action="/Room/Create" method="POST">
+
+    <div>
+        <label>Purpose: </label>
+        <input type="text" name="RoomPurpose" />
+    </div>
+
+    <div>
+        <label>Room Number: </label>
+        <input type="number" name="RoomNumber" />
+    </div>
+
+    <div>
+        <label>Floor: </label>
+        <input type="number" name="Floor" />
+    </div>
+
+    <div>
+        <label>Building: </label>
+        <input type="text" name="Building" />
+    </div>
+
+    <div>
+        <input type="submit" value="Add Room" />
+    </div>
+
+</form>
