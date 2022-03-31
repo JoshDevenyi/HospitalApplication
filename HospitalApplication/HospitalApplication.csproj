@@ -185,6 +185,8 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Controllers\PatientDataController.cs" />
+    <Compile Include="Controllers\ProcedureController.cs" />
+    <Compile Include="Controllers\ProcedureDataController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\RoomDataController.cs" />
     <Compile Include="Global.asax.cs">
@@ -295,6 +297,12 @@
     <Content Include="Views\Room\DeleteConfirm.cshtml" />
     <Content Include="Views\Room\New.cshtml" />
     <Content Include="Views\Room\Edit.cshtml" />
+    <Content Include="Views\Procedure\DeleteConfirm.cshtml" />
+    <Content Include="Views\Procedure\Details.cshtml" />
+    <Content Include="Views\Procedure\Edit.cshtml" />
+    <Content Include="Views\Procedure\Error.cshtml" />
+    <Content Include="Views\Procedure\List.cshtml" />
+    <Content Include="Views\Procedure\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
