@@ -1,46 +1,77 @@
-﻿@model HospitalApplication.Models.ProcedureDto
+﻿@model HospitalApplication.Models.ViewModels.UpdateProcedure
 
 @{
     ViewBag.Title = "Edit";
 }
 
 <div>
-    <a href="/Procedure/Details/@Model.ProcedureId">Go Back</a>
+    <a href="/Procedure/Details/@Model.SelectedProcedure.ProcedureId">Go Back</a>
 </div>
 
-<h2>Update procedure: @Model.ProcedureName at @Model.Time with Dr. @Model.DoctorLastName </h2>
+<h2>Update procedure: @Model.SelectedProcedure.ProcedureName at @Model.SelectedProcedure.Time with Dr. @Model.SelectedProcedure.DoctorLastName </h2>
 
-<form action="/Procedure/Update/@Model.ProcedureId" method="POST">
+<form action="/Procedure/Update/@Model.SelectedProcedure.ProcedureId" method="POST">
 
     <div style="display:none;">
-        <input type="number" name="ProcedureId" value="@Model.ProcedureId" />
+        <input type="number" name="ProcedureId" value="@Model.SelectedProcedure.ProcedureId" />
     </div>
     <div>
         <label>Procedure Name:</label>
-        <input type="text" name="ProcedureName" value="@Model.ProcedureName" />
+        <input type="text" name="ProcedureName" value="@Model.SelectedProcedure.ProcedureName" />
     </div>
     <div>
         <label>Doctor:</label>
-        <input type="number" name="ProcedureDoctor" value="@Model.ProcedureDoctor" />
+        <select name="ProcedureDoctor" value="@Model.SelectedProcedure.ProcedureDoctor">
+            @foreach (var doctor in Model.DoctorOptions)
+            {
+                var selected = "";
+                if (doctor.DoctorId == Model.SelectedProcedure.ProcedureDoctor)
+                {
+                    selected = "selected";
+                }
+                <option value="@doctor.DoctorId" @selected> @doctor.DoctorFirstName @doctor.DoctorLastName</option>
+            }
+        </select>
     </div>
     <div>
         <label>Patient:</label>
-        <input type="number" name="ProcedurePatient" value="@Model.ProcedurePatient" />
+        <select name="ProcedurePatient" value="@Model.SelectedProcedure.ProcedurePatient">
+            @foreach (var patient in Model.PatientOptions)
+            {
+                var selected = "";
+                if (patient.PatientId == Model.SelectedProcedure.ProcedurePatient)
+                {
+                    selected = "selected";
+                }
+                <option value="@patient.PatientId" @selected> @patient.PatientFirstName @patient.PatientLastName</option>
+            }
+        </select>
     </div>
     <div>
         <label>Duration:</label>
-        <input type="number" name="Duration" value="@Model.Duration" />
+        <input type="number" name="Duration" value="@Model.SelectedProcedure.Duration" />
     </div>
     <div>
         <label>Room:</label>
-        <input type="number" name="ProcedureRoom" value="@Model.ProcedureRoom"/>
+        <select name="ProcedureRoom" value="@Model.SelectedProcedure.ProcedureRoom">
+            @foreach (var room in Model.RoomOptions)
+            {
+                var selected = "";
+                if (room.RoomId == Model.SelectedProcedure.ProcedureRoom)
+                {
+                    selected = "selected";
+                }
+                <option value="@room.RoomId"@selected>Room @room.RoomNumber - @room.RoomPurpose</option>
+            }
+        </select>
+    </div>
     <div>
         <label>Date:</label>
-        <input type="date" name="Date" value="@Model.Date" />
+        <input type="date" name="Date" value="@Model.SelectedProcedure.Date" />
     </div>
     <div>
         <label>Time:</label>
-        <input type="time" name="Time" value="@Model.Time" />
+        <input type="time" name="Time" value="@Model.SelectedProcedure.Time" />
     </div>
     <div>
         <input type="submit" value="Update Procedure" />

@@ -1,4 +1,5 @@
-﻿
+﻿@model HospitalApplication.Models.ViewModels.NewProcedure
+
 @{
     ViewBag.Title = "New";
 }
@@ -12,11 +13,21 @@
     </div>
     <div>
         <label>Doctor:</label>
-        <input type="number" name="ProcedureDoctor" />
+        <select name="ProcedureDoctor">
+            @foreach (var doctor in Model.DoctorOptions)
+            {
+                <option value="@doctor.DoctorId">Dr. @doctor.DoctorFirstName  @doctor.DoctorLastName</option>
+            }
+        </select>
     </div>
     <div>
         <label>Patient:</label>
-        <input type="number" name="ProcedurePatient" />
+        <select name="ProcedurePatient">
+            @foreach (var patient in Model.PatientOptions)
+            {
+                <option value="@patient.PatientId"> @patient.PatientFirstName  @patient.PatientLastName</option>
+            }
+        </select>
     </div>
     <div>
         <label>Duration:</label>
@@ -24,7 +35,12 @@
     </div>
     <div>
         <label>Room:</label>
-        <input type="number" name="ProcedureRoom" />
+        <select name="ProcedureRoom">
+            @foreach (var room in Model.RoomOptions)
+            {
+                <option value="@room.RoomId">Room @room.RoomNumber - @room.RoomPurpose</option>
+            }
+        </select>
     </div>
     <div>
         <label>Date:</label>

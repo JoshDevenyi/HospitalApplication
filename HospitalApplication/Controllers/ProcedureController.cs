@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Diagnostics;
 using HospitalApplication.Models;
 using System.Web.Script.Serialization;
+using HospitalApplication.Models.ViewModels;
 
 namespace HospitalApplication.Controllers
 {
@@ -18,7 +19,7 @@ namespace HospitalApplication.Controllers
         static ProcedureController()
         {
             client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44353/api/proceduredata/");
+            client.BaseAddress = new Uri("https://localhost:44353/api/");
         }
         
         
@@ -27,7 +28,7 @@ namespace HospitalApplication.Controllers
         {
             //Communicate with ProcedureData API to pull a list of procedures
 
-            string url = "listprocedures";
+            string url = "proceduredata/listprocedures";
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             IEnumerable<ProcedureDto> procedures = response.Content.ReadAsAsync<IEnumerable<ProcedureDto>>().Result;
@@ -40,7 +41,7 @@ namespace HospitalApplication.Controllers
         {
 
             //Communicate with the ProcedureData API to collect info about a SINGLE procedure
-            string url = "findprocedure/" + id;
+            string url = "proceduredata/findprocedure/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             ProcedureDto selectedprocedure = response.Content.ReadAsAsync<ProcedureDto>().Result;
@@ -58,7 +59,31 @@ namespace HospitalApplication.Controllers
         // GET: Procedure/New
         public ActionResult New()
         {
-            return View();
+            NewProcedure ViewModel = new NewProcedure();
+            //Information about all rooms in the system
+
+            //GET api/roomdata/listrooms
+
+            string url = "roomdata/listrooms";
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            IEnumerable<RoomDto> RoomOptions = response.Content.ReadAsAsync<IEnumerable<RoomDto>>().Result;
+            ViewModel.RoomOptions = RoomOptions;
+
+            //GET api/doctordata/listrooms
+
+            url = "doctordata/listdoctors";
+            response = client.GetAsync(url).Result;
+            IEnumerable<DoctorDto> DoctorOptions = response.Content.ReadAsAsync<IEnumerable<DoctorDto>>().Result;
+            ViewModel.DoctorOptions = DoctorOptions;
+
+            //GET api/roomdata/listrooms
+
+            url = "patientdata/listpatients";
+            response = client.GetAsync(url).Result;
+            IEnumerable<PatientDto> PatientOptions = response.Content.ReadAsAsync<IEnumerable<PatientDto>>().Result;
+            ViewModel.PatientOptions = PatientOptions;
+
+            return View(ViewModel);
         }
 
         // POST: Procedure/Create
@@ -67,7 +92,7 @@ namespace HospitalApplication.Controllers
         {
             //Add a new procedure to the system
 
-            string url = "addprocedure";
+            string url = "proceduredata/addprocedure";
 
             string jsonpayload = jss.Serialize(procedure);
 
@@ -90,17 +115,40 @@ namespace HospitalApplication.Controllers
         // GET: Procedure/Edit/5
         public ActionResult Edit(int id)
         {
-            string url = "findprocedure/" + id;
+            UpdateProcedure ViewModel = new UpdateProcedure();
+            //existing procedure info
+            string url = "proceduredata/findprocedure/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             ProcedureDto SelectedProcedure = response.Content.ReadAsAsync<ProcedureDto>().Result;
-            return View(SelectedProcedure);
+            ViewModel.SelectedProcedure = SelectedProcedure;
+
+            //Include room options available when updating procedure
+            url = "roomdata/listrooms/";
+            response = client.GetAsync(url).Result;
+            IEnumerable<RoomDto> RoomOptions = response.Content.ReadAsAsync<IEnumerable<RoomDto>>().Result;
+            ViewModel.RoomOptions = RoomOptions;
+
+            //Include Doctor options available when updating procedure
+            url = "doctordata/listdoctors/";
+            response = client.GetAsync(url).Result;
+            IEnumerable<DoctorDto> DoctorOptions = response.Content.ReadAsAsync<IEnumerable<DoctorDto>>().Result;
+            ViewModel.DoctorOptions = DoctorOptions;
+
+            //Include patient options available when updating procedure
+            url = "patientdata/listpatients/";
+            response = client.GetAsync(url).Result;
+            IEnumerable<PatientDto> PatientOptions = response.Content.ReadAsAsync<IEnumerable<PatientDto>>().Result;
+            ViewModel.PatientOptions = PatientOptions;
+
+
+            return View(ViewModel);
         }
 
         // POST: Procedure/Update/5
         [HttpPost]
         public ActionResult Update(int id, Procedure procedure)
         {
-            string url = "updateprocedure/" + id;
+            string url = "proceduredata/updateprocedure/" + id;
 
             string jsonpayload = jss.Serialize(procedure);
 
@@ -128,7 +176,7 @@ namespace HospitalApplication.Controllers
         // GET: Procedure/DeleteConfirm/5
         public ActionResult DeleteConfirm(int id)
         {
-            string url = "findprocedure/" + id;
+            string url = "proceduredata/findprocedure/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             ProcedureDto SelectedProcedure = response.Content.ReadAsAsync<ProcedureDto>().Result;
             return View(SelectedProcedure);
@@ -138,7 +186,7 @@ namespace HospitalApplication.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            string url = "deleteprocedure/" + id;
+            string url = "proceduredata/deleteprocedure/" + id;
 
             HttpContent content = new StringContent("");
             content.Headers.ContentType.MediaType = "application/json";
