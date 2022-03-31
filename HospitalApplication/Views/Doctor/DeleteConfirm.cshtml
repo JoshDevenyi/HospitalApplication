@@ -8,7 +8,7 @@
 <h2>Are you sure you want to delete @Model.DoctorFirstName @Model.DoctorLastName?</h2>
 
 <div>
-    <a href="/Doctor/List">Cancel</a>
+    <a href="/Doctor/Details/@Model.DoctorId">Cancel</a>
 </div>
 
 <form action="/Doctor/Delete/@Model.DoctorId" method="POST" class="delete">

@@ -1,0 +1,18 @@
+﻿@model HospitalApplication.Models.RoomDto
+
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+    <a href="/Room/List">Go back to list</a>
+    <br />
+    <a href="/Room/Edit/@Model.RoomId">Edit Room Details</a>
+    <br />
+    <a style="color:red;" href="/Room/DeleteConfirm/@Model.RoomId">Delete Room</a>
+</div>
+<h2>Room @Model.RoomNumber</h2>
+<p>Purpose: @Model.RoomPurpose</p>
+<p>Building: @Model.Building</p>
+<p>Floor: @Model.Floor</p>
