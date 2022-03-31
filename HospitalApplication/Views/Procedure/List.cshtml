@@ -1,0 +1,15 @@
+﻿@model IEnumerable<HospitalApplication.Models.ProcedureDto>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<p><a href="/Procedure/New">Add new Procedure</a></p>
+
+<h2>List</h2>
+@foreach (var procedure in Model)
+{
+    <h2><a href="/Procedure/Details/@procedure.ProcedureId">@procedure.ProcedureName</a></h2>
+    <p>@procedure.DoctorFirstName @procedure.DoctorLastName</p>
+    <p>@procedure.Date</p>
+}

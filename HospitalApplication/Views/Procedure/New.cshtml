@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "New";
+}
+
+<a href="/Procedure/List">Return to Procedure List</a>
+<h2>Create New Procedure</h2>
+<form action="/Procedure/Create" method="POST">
+    <div>
+        <label>Procedure Name:</label>
+        <input type="text" name="ProcedureName" />
+    </div>
+    <div>
+        <label>Doctor:</label>
+        <input type="number" name="ProcedureDoctor" />
+    </div>
+    <div>
+        <label>Patient:</label>
+        <input type="number" name="ProcedurePatient" />
+    </div>
+    <div>
+        <label>Duration:</label>
+        <input type="number" name="Duration" />
+    </div>
+    <div>
+        <label>Room:</label>
+        <input type="number" name="ProcedureRoom" />
+    </div>
+    <div>
+        <label>Date:</label>
+        <input type="date" name="Date" />
+    </div>
+    <div>
+        <label>Time:</label>
+        <input type="time" name="Time" />
+    </div>
+    <div>
+        <input type="submit" value="Add Procedure" />
+    </div>
+
+</form>
+
+

@@ -1,0 +1,20 @@
+﻿@model HospitalApplication.Models.ProcedureDto
+
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<div>
+    <a href="/Procedure/Edit/@Model.ProcedureId">Update Procedure</a>
+    <a href="/Procedure/List">Return to Procedure List</a>
+</div>
+<h2> @Model.ProcedureName</h2>
+<p><strong>Doctor:</strong> @Model.DoctorFirstName @Model.DoctorLastName</p>
+<p><strong>Patient:</strong> @Model.PatientFirstName @Model.PatientLastName </p>
+<p><strong>Room Number:</strong> @Model.RoomNumber </p>
+<p><strong>Duration:</strong> @Model.Duration minutes </p>
+<p><strong>Date:</strong> @Model.Date </p>
+
+<a style="color:red;" href="/Procedure/DeleteConfirm/@Model.ProcedureId">Delete Procedure</a>

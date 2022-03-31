@@ -185,6 +185,8 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Controllers\PatientDataController.cs" />
+    <Compile Include="Controllers\ProcedureController.cs" />
+    <Compile Include="Controllers\ProcedureDataController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -287,6 +289,12 @@
     <Content Include="Views\Patient\Error.cshtml" />
     <Content Include="Views\Patient\List.cshtml" />
     <Content Include="Views\Patient\New.cshtml" />
+    <Content Include="Views\Procedure\List.cshtml" />
+    <Content Include="Views\Procedure\Details.cshtml" />
+    <Content Include="Views\Procedure\Error.cshtml" />
+    <Content Include="Views\Procedure\DeleteConfirm.cshtml" />
+    <Content Include="Views\Procedure\New.cshtml" />
+    <Content Include="Views\Procedure\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -24,7 +24,7 @@ namespace HospitalApplication.Models
         [ForeignKey("Room")]
         public int ProcedureRoom { get; set; }
         public virtual Room Room { get; set; }
-
+        
         public int Duration { get; set; }
         public DateTime Date { get; set; }
         public DateTime Time { get; set; }
@@ -34,9 +34,14 @@ namespace HospitalApplication.Models
     {
         public int ProcedureId { get; set; }
         public string ProcedureName { get; set; }
-        public string ProcedureDoctor { get; set; }
-        public string ProcedurePatient { get; set; }
-        public int ProcedureRoom { get; set; }
+        public string DoctorFirstName { get; set; }
+        public string DoctorLastName { get; set; }
+        public int ProcedureDoctor { get; set; }
+        public string PatientFirstName { get; set; }
+        public string PatientLastName { get; set; }
+        public int ProcedurePatient { get; set; }
+        public int RoomNumber { get; set; }
+        public int ProcedureRoom{ get; set; }
         public int Duration { get; set; }
         public DateTime Date { get; set; }
         public DateTime Time { get; set; }

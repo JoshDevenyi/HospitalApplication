@@ -1,0 +1,50 @@
+﻿@model HospitalApplication.Models.ProcedureDto
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div>
+    <a href="/Procedure/Details/@Model.ProcedureId">Go Back</a>
+</div>
+
+<h2>Update procedure: @Model.ProcedureName at @Model.Time with Dr. @Model.DoctorLastName </h2>
+
+<form action="/Procedure/Update/@Model.ProcedureId" method="POST">
+
+    <div style="display:none;">
+        <input type="number" name="ProcedureId" value="@Model.ProcedureId" />
+    </div>
+    <div>
+        <label>Procedure Name:</label>
+        <input type="text" name="ProcedureName" value="@Model.ProcedureName" />
+    </div>
+    <div>
+        <label>Doctor:</label>
+        <input type="number" name="ProcedureDoctor" value="@Model.ProcedureDoctor" />
+    </div>
+    <div>
+        <label>Patient:</label>
+        <input type="number" name="ProcedurePatient" value="@Model.ProcedurePatient" />
+    </div>
+    <div>
+        <label>Duration:</label>
+        <input type="number" name="Duration" value="@Model.Duration" />
+    </div>
+    <div>
+        <label>Room:</label>
+        <input type="number" name="ProcedureRoom" value="@Model.ProcedureRoom"/>
+    <div>
+        <label>Date:</label>
+        <input type="date" name="Date" value="@Model.Date" />
+    </div>
+    <div>
+        <label>Time:</label>
+        <input type="time" name="Time" value="@Model.Time" />
+    </div>
+    <div>
+        <input type="submit" value="Update Procedure" />
+    </div>
+
+</form>
+
