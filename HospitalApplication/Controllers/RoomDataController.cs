@@ -16,7 +16,15 @@ namespace HospitalApplication.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/RoomData/ListRooms
+        /// <summary>
+        /// Returns All Rooms in the system.
+        /// </summary>
+        /// <returns>
+        /// CONTENT: All the Rooms in the database
+        /// </returns>
+        /// <example>
+        /// GET: api/RoomData/ListRooms
+        /// </example>
         [HttpGet]
         public IEnumerable<RoomDto> ListRooms()
         {
@@ -35,7 +43,20 @@ namespace HospitalApplication.Controllers
             return RoomDtos;
         }
 
-        // GET: api/RoomData/FindRoom/5
+
+        /// <summary>
+        /// Returns a specific room in the system.
+        /// </summary>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: An room in the system that corresponds to the provided primary key. 
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <param name="id">The primary key of the room</param>
+        /// <example>
+        /// GET: api/RoomData/FindRoom/5
+        /// </example>
         [ResponseType(typeof(Room))]
         [HttpGet]
         public IHttpActionResult FindRoom(int id)
@@ -58,7 +79,22 @@ namespace HospitalApplication.Controllers
             return Ok(RoomDto);
         }
 
-        // PUT: api/RoomData/UpdateRoom/5
+        /// <summary>
+        /// Updates a specified room in the system with a POST Data input
+        /// </summary>
+        /// <param name="id">Represents the Rooms primary key id</param>
+        /// <param name="room">JSON FORM DATA of a Room</param>
+        /// <returns>
+        /// HEADER: 204 (Success, No Content Response)
+        /// or
+        /// HEADER: 400 (Bad Request)
+        /// or
+        /// HEADER: 404 (Not Found)
+        /// </returns>
+        /// <example>
+        /// POST: api/RoomData/UpdateRoom/5
+        /// FORM DATA: Room JSON Object
+        /// </example>
         [ResponseType(typeof(void))]
         [HttpPost]
         public IHttpActionResult UpdateRoom(int id, Room room)
@@ -94,7 +130,20 @@ namespace HospitalApplication.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/RoomData/AddRoom
+        /// <summary>
+        /// Adds a new Room to the system
+        /// </summary>
+        /// <param name="room">JSON FORM DATA of a Room</param>
+        /// <returns>
+        /// HEADER: 201 (Created)
+        /// CONTENT: Room ID, Room Data
+        /// or
+        /// HEADER: 400 (Bad Request)
+        /// </returns>
+        /// <example>
+        /// POST: api/RoomData/AddRoom
+        /// FORM DATA: Room JSON Object
+        /// </example>
         [ResponseType(typeof(Room))]
         [HttpPost]
         public IHttpActionResult AddRoom(Room room)
@@ -110,7 +159,19 @@ namespace HospitalApplication.Controllers
             return CreatedAtRoute("DefaultApi", new { id = room.RoomId }, room);
         }
 
-        // DELETE: api/RoomData/DeleteRoom/5
+        /// <summary>
+        /// Deletes an Room from the system by a provided id.
+        /// </summary>
+        /// <param name="id">A Rooms Primary Key Id</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <example>
+        /// POST: api/RoomData/DeleteRoom/5
+        /// FORM DATA: (empty)
+        /// </example>
         [ResponseType(typeof(Room))]
         [HttpPost]
         public IHttpActionResult DeleteRoom(int id)
