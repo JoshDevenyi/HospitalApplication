@@ -17,7 +17,15 @@ namespace HospitalApplication.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/DoctorData/ListDoctors
+        /// <summary>
+        /// Returns All Doctors in the system.
+        /// </summary>
+        /// <returns>
+        /// CONTENT: All the Doctors in the database
+        /// </returns>
+        /// <example>
+        /// GET: api/DoctorData/ListDoctors
+        /// </example>
         [HttpGet]
         public IEnumerable<DoctorDto> ListDoctors()
         {
@@ -39,7 +47,19 @@ namespace HospitalApplication.Controllers
 
         }
 
-        // GET: api/DoctorData/FindDoctor/5
+        /// <summary>
+        /// Returns a specific doctor in the system.
+        /// </summary>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: An doctor in the system that corresponds to the provided primary key. 
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <param name="id">The primary key of the doctor</param>
+        /// <example>
+        /// GET: api/DoctorData/FindDoctor/5
+        /// </example>
         [ResponseType(typeof(Doctor))]
         [HttpGet]
         public IHttpActionResult FindDoctor(int id)
@@ -63,7 +83,23 @@ namespace HospitalApplication.Controllers
             return Ok(DoctorDto);
         }
 
-        // PUT: api/DoctorData/UpdateDoctor/5
+
+        /// <summary>
+        /// Updates a specified doctor in the system with a POST Data input
+        /// </summary>
+        /// <param name="id">Represents the Doctors primary key id</param>
+        /// <param name="doctor">JSON FORM DATA of a Doctor</param>
+        /// <returns>
+        /// HEADER: 204 (Success, No Content Response)
+        /// or
+        /// HEADER: 400 (Bad Request)
+        /// or
+        /// HEADER: 404 (Not Found)
+        /// </returns>
+        /// <example>
+        /// POST: api/DoctorData/UpdateDoctor/5
+        /// FORM DATA: Doctor JSON Object
+        /// </example>
         [ResponseType(typeof(void))]
         [HttpPost]
         public IHttpActionResult UpdateDoctor(int id, Doctor doctor)
@@ -100,7 +136,20 @@ namespace HospitalApplication.Controllers
         }
 
 
-        // POST: api/DoctorData/AddDoctor
+        /// <summary>
+        /// Adds a new Doctor to the system
+        /// </summary>
+        /// <param name="doctor">JSON FORM DATA of a Doctor</param>
+        /// <returns>
+        /// HEADER: 201 (Created)
+        /// CONTENT: Doctor ID, Doctor Data
+        /// or
+        /// HEADER: 400 (Bad Request)
+        /// </returns>
+        /// <example>
+        /// POST: api/DoctorData/AddDoctor
+        /// FORM DATA: Doctor JSON Object
+        /// </example>
         [ResponseType(typeof(Doctor))]
         [HttpPost]
         public IHttpActionResult AddDoctor(Doctor doctor)
@@ -117,7 +166,19 @@ namespace HospitalApplication.Controllers
         }
 
 
-        // DELETE: api/DoctorData/DeleteDoctor/5
+        /// <summary>
+        /// Deletes an Doctor from the system by a provided id.
+        /// </summary>
+        /// <param name="id">A Doctors Primary Key Id</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <example>
+        /// POST: api/DoctorData/DeleteDoctor/5
+        /// FORM DATA: (empty)
+        /// </example>
         [ResponseType(typeof(Doctor))]
         [HttpPost]
         public IHttpActionResult DeleteDoctor(int id)
