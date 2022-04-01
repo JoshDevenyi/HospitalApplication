@@ -4,8 +4,9 @@
     ViewBag.Title = "New";
 }
 
+
+<h2>Add a New Procedure</h2>
 <a href="/Procedure/List">Return to Procedure List</a>
-<h2>Create New Procedure</h2>
 <form action="/Procedure/Create" method="POST">
     <div>
         <label>Procedure Name:</label>
@@ -50,7 +51,7 @@
         <label>Time:</label>
         <input type="time" name="Time" />
     </div>
-    <div id="submit-container">
+    <div class="submit-container">
         <input type="submit" value="Add Procedure" />
     </div>
 

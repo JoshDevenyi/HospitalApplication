@@ -5,14 +5,19 @@
     ViewBag.Title = "DeleteConfirm";
 }
 
-<h2>Are you sure you want to delete @Model.DoctorFirstName @Model.DoctorLastName?</h2>
+<div class="deleteConfirm">
 
-<div>
-    <a href="/Doctor/Details/@Model.DoctorId">Cancel</a>
+    <h2 class="deleteTitle">Confirm Deletion</h2>
+
+    <h2><strong>Are you sure you want to delete the following doctor?</strong></h2>
+    <h3> @Model.DoctorFirstName @Model.DoctorLastName</h3>
+
+    <form action="/Procedure/Delete/@Model.DoctorId" method="POST" class="delete">
+        <input type="submit" style="background-color:red;" value="Confirm Delete" />
+    </form>
+
 </div>
 
-<form action="/Doctor/Delete/@Model.DoctorId" method="POST" class="delete">
-
-    <input type="submit" style="background-color:red;" value="Confirm Delete" />
-
-</form>
+<div>
+    <a href="/Doctor/Details/@Model.DoctorId"> Cancel - Return to Doctor</a>
+</div>

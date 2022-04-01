@@ -4,14 +4,19 @@
     ViewBag.Title = "DeleteConfirm";
 }
 
-<h2>Are you sure you want to delete Room @Model.RoomNumber?</h2>
+<div class="deleteConfirm">
 
-<div>
-    <a href="/Room/Details/@Model.RoomId">Cancel</a>
+    <h2 class="deleteTitle">Confirm Deletion</h2>
+
+    <h2><strong>Are you sure you want to delete the following room?</strong></h2>
+    <h3>Room @Model.RoomNumber?</h3>
+
+    <form action="/Procedure/Delete/@Model.RoomId" method="POST" class="delete">
+        <input type="submit" style="background-color:red;" value="Confirm Delete" />
+    </form>
+
 </div>
 
-<form action="/Room/Delete/@Model.RoomId" method="POST" class="delete">
-
-    <input type="submit" style="background-color:red;" value="Confirm Delete" />
-
-</form>
+<div>
+    <a href="/Room/Details/@Model.RoomId"> Cancel - Return to Room</a>
+</div>

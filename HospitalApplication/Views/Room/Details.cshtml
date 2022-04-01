@@ -5,14 +5,18 @@
     ViewBag.Title = "Details";
 }
 
+<h2>Room Details</h2>
+
 <div>
-    <a href="/Room/List">Go back to list</a>
+    <a href="/Room/List">Return to Room List</a>
     <br />
-    <a href="/Room/Edit/@Model.RoomId">Edit Room Details</a>
+    <a href="/Room/Edit/@Model.RoomId">Update Room Details</a>
     <br />
     <a style="color:red;" href="/Room/DeleteConfirm/@Model.RoomId">Delete Room</a>
 </div>
-<h2>Room @Model.RoomNumber</h2>
+
+<h1>Room @Model.RoomNumber</h1>
+
 <p>Purpose: @Model.RoomPurpose</p>
 <p>Building: @Model.Building</p>
 <p>Floor: @Model.Floor</p>
