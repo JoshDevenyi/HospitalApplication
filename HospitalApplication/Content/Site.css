@@ -17,8 +17,40 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+
+form {
+    width: 80%;
+    margin: 0 auto;
+}
+
+label, input, select {
+    font-size: 20px;
+}
+
+label,
+input {
+    display: inline-block;
+}
+
+label {
+  width: 30%;
+  text-align: right;
+}
+
+label + input {
+    width: 30%;
+    margin: 0% 30% 0% 4%;
+ }
+
+label + select {
+    width: 30%;
+    margin: 0 30% 0 4%;
+}
+
+input + input {
+    float: right;
+}
+
+#submit-container{
+    text-align: center;
 }
