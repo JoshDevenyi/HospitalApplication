@@ -16,15 +16,34 @@ namespace HospitalApplication.Controllers
     public class PatientDataController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
-        // GET: api/PatientData/ListPatients
+        /// <summary>
+        /// Returns all Patients in the database
+        /// </summary>
+        /// <returns>
+        /// CONTENT: All the Patients in the database
+        /// </returns>
+        /// <example>
+        /// GET: api/PatientData/ListPatients
+        /// </example>
+        
         [HttpGet]
         public IQueryable<Patient> ListPatients()
         {
             return db.Patients;
         }
 
-        // GET: api/PatientData/FindPatient/5
+        /// <summary>
+        /// Return a Patient based on a given ID
+        /// </summary>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: A Patient from the Database with the matching ID
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <param name="id">The primary key of the Patient</param>
+        /// <example>
+        /// GET: api/PatientData/FindPatient/5
+        /// </example>
         [ResponseType(typeof(Patient))]
         [HttpGet]
         public IHttpActionResult FindPatient(int id)
@@ -38,7 +57,22 @@ namespace HospitalApplication.Controllers
             return Ok(patient);
         }
 
-        // POST: api/PatientData/UpdatePatient/5
+        /// <summary>
+        /// Updates a specified Patient in the system with a POST Data input
+        /// </summary>
+        /// <param name="id">Represents the Patients primary key id</param>
+        /// <param name="Patient">JSON FORM DATA of a Patient</param>
+        /// <returns>
+        /// HEADER: 204 (Success, No Content Response)
+        /// or
+        /// HEADER: 400 (Bad Request)
+        /// or
+        /// HEADER: 404 (Not Found)
+        /// </returns>
+        /// <example>
+        /// POST: api/PatientData/UpdatePatient/5
+        /// FORM DATA: Patient JSON Object
+        /// </example>
         [ResponseType(typeof(void))]
         [HttpPost]
         public IHttpActionResult UpdatePatient(int id, Patient patient)
@@ -74,7 +108,20 @@ namespace HospitalApplication.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/PatientData/AddPatient
+        /// <summary>
+        /// Adds a new Patient to the system
+        /// </summary>
+        /// <param name="patient">JSON FORM DATA of a Patient</param>
+        /// <returns>
+        /// HEADER: 201 (Created)
+        /// CONTENT: Patient ID, Patient Data
+        /// or
+        /// HEADER: 400 (Bad Request)
+        /// </returns>
+        /// <example>
+        /// POST: api/PatientData/AddPatient
+        /// FORM DATA: Patient JSON Object
+        /// </example>
         [ResponseType(typeof(Patient))]
         [HttpPost]
         public IHttpActionResult AddPatient(Patient patient)
@@ -90,7 +137,19 @@ namespace HospitalApplication.Controllers
             return CreatedAtRoute("DefaultApi", new { id = patient.PatientId }, patient);
         }
 
-        // DELETE: api/PatientData/DeletePatient/5
+        /// <summary>
+        /// Deletes a Patient from the system by a provided id.
+        /// </summary>
+        /// <param name="id">A Patient's Primary Key Id</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <example>
+        /// POST: api/PatientData/DeletePatient/5
+        /// FORM DATA: (empty)
+        /// </example>
         [ResponseType(typeof(Patient))]
         [HttpPost]
         public IHttpActionResult DeletePatient(int id)

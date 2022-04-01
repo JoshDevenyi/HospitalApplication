@@ -16,14 +16,23 @@ namespace HospitalApplication.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/ProcedureData/List
+        /// <summary>
+        /// Returns all procedures in the database
+        /// </summary>
+        /// <returns>
+        /// CONTENT: All procedures in the database
+        /// </returns>
+        /// <example>
+        /// GET: api/ProcedureData/ListProcedures
+        /// </example>
+
         [HttpGet]
         public IEnumerable<ProcedureDto> ListProcedures()
         {
             List<Procedure> Procedures = db.Procedures.ToList();
             List<ProcedureDto> ProcedureDtos = new List<ProcedureDto>();
-            
-            Procedures.ForEach(p => ProcedureDtos.Add(new ProcedureDto() 
+
+            Procedures.ForEach(p => ProcedureDtos.Add(new ProcedureDto()
             {
                 ProcedureId = p.ProcedureId,
                 ProcedureName = p.ProcedureName,
@@ -41,14 +50,25 @@ namespace HospitalApplication.Controllers
             return ProcedureDtos;
         }
 
-        // GET: api/ProcedureData/FindProcedure/1
+        /// <summary>
+        /// Return a procedure based on a given ID
+        /// </summary>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: A procedure from the Database with the matching ID
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <param name="id">The primary key of the Procedure</param>
+        /// <example>
+        /// GET: api/ProcedureData/FindProcedure/5
+        /// </example>
         [ResponseType(typeof(Procedure))]
         [HttpGet]
         public IHttpActionResult FindProcedure(int id)
         {
             Procedure procedure = db.Procedures.Find(id);
             ProcedureDto ProcedureDto = new ProcedureDto()
-            { 
+            {
                 ProcedureId = procedure.ProcedureId,
                 ProcedureName = procedure.ProcedureName,
                 DoctorFirstName = procedure.Doctor.DoctorFirstName,
@@ -71,7 +91,22 @@ namespace HospitalApplication.Controllers
             return Ok(ProcedureDto);
         }
 
-        // POST: api/ProcedureData/UpdateProcedure/1
+        /// <summary>
+        /// Updates a specified Procedure in the system with a POST Data input
+        /// </summary>
+        /// <param name="id">Represents the Procedures primary key id</param>
+        /// <param name="procedure">JSON FORM DATA of a Procedure</param>
+        /// <returns>
+        /// HEADER: 204 (Success, No Content Response)
+        /// or
+        /// HEADER: 400 (Bad Request)
+        /// or
+        /// HEADER: 404 (Not Found)
+        /// </returns>
+        /// <example>
+        /// POST: api/ProcedureData/UpdateProcedure/5
+        /// FORM DATA: Procedure JSON Object
+        /// </example>
         [ResponseType(typeof(void))]
         [HttpPost]
         public IHttpActionResult UpdateProcedure(int id, Procedure procedure)
@@ -107,7 +142,20 @@ namespace HospitalApplication.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/ProcedureData/AddProcedure
+        /// <summary>
+        /// Adds a new Procedure to the system
+        /// </summary>
+        /// <param name="procedure">JSON FORM DATA of a Procedure</param>
+        /// <returns>
+        /// HEADER: 201 (Created)
+        /// CONTENT: Procedure ID, Procedure Data
+        /// or
+        /// HEADER: 400 (Bad Request)
+        /// </returns>
+        /// <example>
+        /// POST: api/ProcedureData/AddProcedure
+        /// FORM DATA: Procedure JSON Object
+        /// </example>
         [ResponseType(typeof(Procedure))]
         [HttpPost]
         public IHttpActionResult AddProcedure(Procedure procedure)
@@ -123,7 +171,20 @@ namespace HospitalApplication.Controllers
             return CreatedAtRoute("DefaultApi", new { id = procedure.ProcedureId }, procedure);
         }
 
-        // POST: api/ProcedureData/DeleteProcedure/1
+
+        /// <summary>
+        /// Deletes a Procedure from the system by a provided id.
+        /// </summary>
+        /// <param name="id">A Procedure's Primary Key Id</param>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <example>
+        /// POST: api/ProcedureData/DeleteProcedure/5
+        /// FORM DATA: (empty)
+        /// </example>
         [ResponseType(typeof(Procedure))]
         [HttpPost]
         public IHttpActionResult DeleteProcedure(int id)
