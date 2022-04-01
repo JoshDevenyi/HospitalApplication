@@ -4,11 +4,11 @@
     ViewBag.Title = "Edit";
 }
 
-<div>
-    <a href="/Procedure/Details/@Model.SelectedProcedure.ProcedureId">Go Back</a>
-</div>
+<h2>Update @Model.SelectedProcedure.ProcedureName with Dr. @Model.SelectedProcedure.DoctorLastName </h2>
 
-<h2>Update procedure: @Model.SelectedProcedure.ProcedureName at @Model.SelectedProcedure.Time with Dr. @Model.SelectedProcedure.DoctorLastName </h2>
+<div>
+    <a href="/Procedure/Details/@Model.SelectedProcedure.ProcedureId">Return to @Model.SelectedProcedure.ProcedureName</a>
+</div>
 
 <form action="/Procedure/Update/@Model.SelectedProcedure.ProcedureId" method="POST">
 
@@ -73,7 +73,7 @@
         <label>Time:</label>
         <input type="time" name="Time" value="@Model.SelectedProcedure.Time" />
     </div>
-    <div>
+    <div class="submit-container">
         <input type="submit" value="Update Procedure" />
     </div>
 

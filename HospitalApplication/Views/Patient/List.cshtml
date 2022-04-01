@@ -4,8 +4,11 @@
     ViewBag.Title = "List";
 }
 
-<p><a href="/Patient/New">Add new Patient</a></p>
-<h2>List</h2>
+
+<h2>List of Patients</h2>
+
+<p><a href="/Patient/New">Add New Patient</a></p>
+
 @foreach (var patient in Model)
 {
     <h2><a href="/Patient/Details/@patient.PatientId">@patient.PatientLastName</a></h2>

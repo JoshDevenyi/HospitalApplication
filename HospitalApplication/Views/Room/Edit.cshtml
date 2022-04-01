@@ -5,7 +5,11 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Update Room @Model.RoomNumber?</h2>
+<h2>Update Room @Model.RoomNumber</h2>
+
+<div>
+    <a href="/Room/Details/@Model.RoomId">Return to Room @Model.RoomNumber</a>
+</div>
 
 <form action="/Room/Update/@Model.RoomId" method="POST">
 
@@ -33,7 +37,7 @@
         <input type="text" name="Building" value="@Model.Building"/>
     </div>
 
-    <div>
+    <div class="submit-container">
         <input type="submit" value="Update Room" />
     </div> 
 

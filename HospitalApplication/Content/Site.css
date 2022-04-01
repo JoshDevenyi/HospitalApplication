@@ -22,3 +22,65 @@ select,
 textarea {
     max-width: 280px;
 }
+
+
+.jumbotron{
+
+    text-align: center;
+
+}
+
+#indexTitle{
+
+   margin-top: 0;
+
+}
+
+#hospitalPic {
+    border: 5px solid #222222;
+}
+
+.deleteConfirm {
+    text-align: center;
+}
+
+.deleteTitle{
+
+    text-decoration: underline;
+
+}
+
+/*FORM STYLES*/
+
+form {
+    width: 80%;
+    margin: 0 auto;
+}
+
+label,
+input {
+    display: inline-block;
+}
+
+label {
+    width: 30%;
+    text-align: right;
+}
+
+    label + input {
+        width: 30%;
+        margin: 0% 30% 0% 4%;
+    }
+
+    label + select {
+        width: 30%;
+        margin: 0 30% 0 4%;
+    }
+
+input + input {
+    float: right;
+}
+
+.submit-container {
+    text-align: center;
+}

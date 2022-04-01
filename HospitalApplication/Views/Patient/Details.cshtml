@@ -3,13 +3,19 @@
 @{
     ViewBag.Title = "Details";
 }
+
+<h2>Patient Details</h2>
+
 <div>
-    <a href="/Patient/Edit/@Model.PatientId">Update Patient</a>
     <a href="/Patient/List">Return to Patient List</a>
+    <br />
+    <a href="/Patient/Edit/@Model.PatientId">Update Patient Details</a>
+    <br />
+    <a style="color:red;" href="/Patient/DeleteConfirm/@Model.PatientId">Delete Patient</a>
 </div>
-<h2> @Model.PatientFirstName @Model.PatientLastName</h2>
+
+<h1> @Model.PatientFirstName @Model.PatientLastName</h1>
 <p><strong>Phone:</strong> @Model.PatientPhone</p>
 <p><strong>Email:</strong> @Model.PatientEmail</p>
 
-<a style="color:red;" href="/Patient/DeleteConfirm/@Model.PatientId">Delete Patient</a>
 

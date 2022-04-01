@@ -4,10 +4,10 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Update Dr. @Model.DoctorLastName?</h2>
+<h2>Update @Model.DoctorFirstName @Model.DoctorLastName</h2>
 
 <div>
-    <a href="/Doctor/Details/@Model.DoctorId">Go Back to @Model.DoctorFirstName @Model.DoctorLastName</a>
+    <a href="/Doctor/Details/@Model.DoctorId">Return to @Model.DoctorFirstName @Model.DoctorLastName</a>
 </div>
 
 <form action="/Doctor/Update/@Model.DoctorId" method="POST">
@@ -46,7 +46,7 @@
         <input type="email" name="DoctorEmail" value="@Model.DoctorEmail" />
     </div>
 
-    <div>
+    <div class="submit-container">
         <input type="submit" value="Update Doctor" />
     </div>
 

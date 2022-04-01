@@ -6,7 +6,7 @@
 <h2>Update @Model.PatientFirstName @Model.PatientLastName</h2>
 
 <div>
-    <a href="/Patient/Details/@Model.PatientId">Go Back to @Model.PatientFirstName @Model.PatientLastName</a>
+    <a href="/Patient/Details/@Model.PatientId">Return to @Model.PatientFirstName @Model.PatientLastName</a>
 </div>
 
 <form action="/Patient/Update/@Model.PatientId" method="POST">
@@ -35,7 +35,7 @@
         <input type="email" name="PatientEmail" value="@Model.PatientEmail" />
     </div>
 
-    <div>
+    <div class="submit-container">
         <input type="submit" value="Update Patient" />
     </div>
 

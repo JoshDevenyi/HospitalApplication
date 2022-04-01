@@ -1,18 +1,22 @@
 ﻿@model HospitalApplication.Models.ProcedureDto
 
-
 @{
     ViewBag.Title = "DeleteConfirm";
 }
 
-<h2>Delete Confirmation</h2>
+<div class="deleteConfirm">
 
-<h2> Are you sure you want to delete the following procedure: @Model.ProcedureName on @Model.Date?</h2>
+    <h2 class="deleteTitle">Confirm Deletion</h2>
 
-<div>
-    <a href="/Procedure/List"> Cancel - Return to Procedures</a>
+    <h2><strong>Are you sure you want to delete the following procedure?</strong></h2>
+    <h3>@Model.ProcedureName on @Model.Date</h3>
+
+    <form action="/Procedure/Delete/@Model.ProcedureId" method="POST" class="delete">
+        <input type="submit" style="background-color:red;" value="Confirm Delete" />
+    </form>
+
 </div>
 
-<form action="/Procedure/Delete/@Model.ProcedureId" method="POST" class="delete">
-    <input type="submit" style="background-color:red;" value="Confirm Delete" />
-</form>
+<div>
+    <a href="/Procedure/Details/@Model.ProcedureId"> Cancel - Return to Procedure</a>
+</div>
