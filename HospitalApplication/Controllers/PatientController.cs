@@ -6,56 +6,70 @@ using System.Web.Mvc;
 using System.Net.Http;
 using System.Diagnostics;
 using HospitalApplication.Models;
+using HospitalApplication.Models.ViewModels;
 using System.Web.Script.Serialization;
 
 namespace HospitalApplication.Controllers
 {
     public class PatientController : Controller
     {
-            private static readonly HttpClient client;
-            private JavaScriptSerializer jss = new JavaScriptSerializer();
+        private static readonly HttpClient client;
+        private JavaScriptSerializer jss = new JavaScriptSerializer();
 
-            static PatientController()
-            {
-                client = new HttpClient();
-                client.BaseAddress = new Uri("https://localhost:44353/api/patientdata/");
-            }
+        static PatientController()
+        {
+            client = new HttpClient();
+            client.BaseAddress = new Uri("https://localhost:44353/api/");
+        }
 
-            // GET: Patient/List
-            public ActionResult List()
-            {
-                //Communicate with PatientData API to initiate a list of patients
+        // GET: Patient/List
+        public ActionResult List()
+        {
+            //Communicate with PatientData API to initiate a list of patients
 
-                string url = "listpatients";
-                HttpResponseMessage response = client.GetAsync(url).Result;
+            string url = "patientdata/listpatients";
+            HttpResponseMessage response = client.GetAsync(url).Result;
 
-                //Debug.WriteLine("The response code is ");
-                //Debug.WriteLine(response.StatusCode);
+            //Debug.WriteLine("The response code is ");
+            //Debug.WriteLine(response.StatusCode);
 
-                IEnumerable<PatientDto> patients = response.Content.ReadAsAsync<IEnumerable<PatientDto>>().Result;
+            IEnumerable<PatientDto> patients = response.Content.ReadAsAsync<IEnumerable<PatientDto>>().Result;
 
-                //Debug.WriteLine("Number of patients received: ");
-                //Debug.WriteLine(patients.Count());
+            //Debug.WriteLine("Number of patients received: ");
+            //Debug.WriteLine(patients.Count());
 
-                return View(patients);
-            }
+            return View(patients);
+        }
 
-            // GET: Patient/Details/5
-            public ActionResult Details(int id)
-            {
-                //Communicate with PatientData API to retrieve a patient
-                string url = "findpatient/" + id;
-                HttpResponseMessage response = client.GetAsync(url).Result;
+        // GET: Patient/Details/5
+        public ActionResult Details(int id)
+        {
+            //Communicate with PatientData API to retrieve a patient
 
-                Debug.WriteLine("The response code is ");
-                Debug.WriteLine(response.StatusCode);
+            DetailsPatient ViewModel = new DetailsPatient();
 
-                PatientDto selectedpatient = response.Content.ReadAsAsync<PatientDto>().Result;
-                Debug.WriteLine("Patient Received: ");
-                Debug.WriteLine(selectedpatient.PatientFirstName);
+            string url = "patientdata/findpatient/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
 
-                return View(selectedpatient);
-            }
+            Debug.WriteLine("The response code is ");
+            Debug.WriteLine(response.StatusCode);
+
+            PatientDto SelectedPatient = response.Content.ReadAsAsync<PatientDto>().Result;
+            Debug.WriteLine("Patient Received: ");
+            Debug.WriteLine(SelectedPatient.PatientFirstName);
+
+            ViewModel.SelectedPatient = SelectedPatient;
+
+
+            //Send a request to gather information about procedures related to a patient ID 
+            url = "proceduredata/listproceduresforpatient/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<ProcedureDto> RelatedProcedures = response.Content.ReadAsAsync<IEnumerable<ProcedureDto>>().Result; ;
+
+            ViewModel.RelatedProcedures = RelatedProcedures;
+
+            return View(ViewModel);
+        }
 
         // GET: Patient/Delete/Error
         public ActionResult Error()
@@ -77,7 +91,7 @@ namespace HospitalApplication.Controllers
 
             //add a new patient into the system using API data
 
-            string url = "addpatient";
+            string url = "patientdata/addpatient";
 
             string jsonpayload = jss.Serialize(patient);
 
@@ -100,7 +114,7 @@ namespace HospitalApplication.Controllers
         // GET: Patient/Edit/5
         public ActionResult Edit(int id)
         {
-            string url = "findpatient/" + id;
+            string url = "patientdata/findpatient/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             PatientDto SelectedPatient = response.Content.ReadAsAsync<PatientDto>().Result;
             return View(SelectedPatient);
@@ -110,7 +124,7 @@ namespace HospitalApplication.Controllers
         [HttpPost]
         public ActionResult Update(int id, Patient patient)
         {
-            string url = "updatepatient/" + id;
+            string url = "patientdata/updatepatient/" + id;
 
             string jsonpayload = jss.Serialize(patient);
 
@@ -141,7 +155,7 @@ namespace HospitalApplication.Controllers
         public ActionResult DeleteConfirm(int id)
         {
             //The existing patient information
-            string url = "findpatient/" + id;
+            string url = "patientdata/findpatient/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             PatientDto SelectedPatient = response.Content.ReadAsAsync<PatientDto>().Result;
             return View(SelectedPatient);
@@ -151,10 +165,10 @@ namespace HospitalApplication.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            string url = "deletepatient/" + id;
+            string url = "patientdata/deletepatient/" + id;
 
             HttpContent content = new StringContent("");
-            content.Headers.ContentType.MediaType = "application/json"; 
+            content.Headers.ContentType.MediaType = "application/json";
             HttpResponseMessage response = client.PostAsync(url, content).Result;
 
             Debug.WriteLine(id);

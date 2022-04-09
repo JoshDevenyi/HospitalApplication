@@ -1,4 +1,4 @@
-﻿@model HospitalApplication.Models.PatientDto
+﻿@model HospitalApplication.Models.ViewModels.DetailsPatient
 
 @{
     ViewBag.Title = "Details";
@@ -9,13 +9,23 @@
 <div>
     <a href="/Patient/List">Return to Patient List</a>
     <br />
-    <a href="/Patient/Edit/@Model.PatientId">Update Patient Details</a>
+    <a href="/Patient/Edit/@Model.SelectedPatient.PatientId">Update Patient Details</a>
     <br />
-    <a style="color:red;" href="/Patient/DeleteConfirm/@Model.PatientId">Delete Patient</a>
+    <a style="color:red;" href="/Patient/DeleteConfirm/@Model.SelectedPatient.PatientId">Delete Patient</a>
 </div>
 
-<h1> @Model.PatientFirstName @Model.PatientLastName</h1>
-<p><strong>Phone:</strong> @Model.PatientPhone</p>
-<p><strong>Email:</strong> @Model.PatientEmail</p>
+<h1> @Model.SelectedPatient.PatientFirstName @Model.SelectedPatient.PatientLastName</h1>
+<p><strong>Phone:</strong> @Model.SelectedPatient.PatientPhone</p>
+<p><strong>Email:</strong> @Model.SelectedPatient.PatientEmail</p>
 
+
+<div>
+    <h3>Upcoming Procedures</h3>
+    <ul>
+        @foreach (var procedure in Model.RelatedProcedures)
+        {
+            <li><a href="/procedure/details/@procedure.ProcedureId">@procedure.ProcedureName</a></li>
+        }
+    </ul>
+</div>
 

@@ -51,6 +51,76 @@ namespace HospitalApplication.Controllers
         }
 
         /// <summary>
+        /// Gather information for all procedures related to a particular doctor id
+        /// </summary>
+        /// <returns>
+        /// CONTENT: All procedures in the database related to the desired doctor
+        /// </returns>
+        /// <param name="id">Doctor Id</param>
+        /// <example>
+        /// GET: api/ProcedureData/ListProceduresForDoctor/3
+        /// </example>
+
+        [HttpGet]
+        public IEnumerable<ProcedureDto> ListProceduresForDoctor(int id)
+        {
+            List<Procedure> Procedures = db.Procedures.Where(p => p.ProcedureDoctor == id).ToList();
+            List<ProcedureDto> ProcedureDtos = new List<ProcedureDto>();
+
+            Procedures.ForEach(p => ProcedureDtos.Add(new ProcedureDto()
+            {
+                ProcedureId = p.ProcedureId,
+                ProcedureName = p.ProcedureName,
+                DoctorFirstName = p.Doctor.DoctorFirstName,
+                DoctorLastName = p.Doctor.DoctorLastName,
+                PatientFirstName = p.Patient.PatientFirstName,
+                PatientLastName = p.Patient.PatientLastName,
+                RoomNumber = p.Room.RoomNumber,
+                Duration = p.Duration,
+                Date = p.Date,
+                Time = p.Time
+
+            }));
+
+            return ProcedureDtos;
+        }
+
+        /// <summary>
+        /// Returns all procedures in the database
+        /// </summary>
+        /// <returns>
+        /// CONTENT: All procedures in the database
+        /// </returns>
+        /// <param name="id">Patient ID</param>
+        /// <example>
+        /// GET: api/ProcedureData/ListProcedures/3
+        /// </example>
+
+        [HttpGet]
+        public IEnumerable<ProcedureDto> ListProceduresForPatient(int id)
+        {
+            List<Procedure> Procedures = db.Procedures.Where(p=>p.ProcedurePatient==id).ToList();
+            List<ProcedureDto> ProcedureDtos = new List<ProcedureDto>();
+
+            Procedures.ForEach(p => ProcedureDtos.Add(new ProcedureDto()
+            {
+                ProcedureId = p.ProcedureId,
+                ProcedureName = p.ProcedureName,
+                DoctorFirstName = p.Doctor.DoctorFirstName,
+                DoctorLastName = p.Doctor.DoctorLastName,
+                PatientFirstName = p.Patient.PatientFirstName,
+                PatientLastName = p.Patient.PatientLastName,
+                RoomNumber = p.Room.RoomNumber,
+                Duration = p.Duration,
+                Date = p.Date,
+                Time = p.Time
+
+            }));
+
+            return ProcedureDtos;
+        }
+
+        /// <summary>
         /// Return a procedure based on a given ID
         /// </summary>
         /// <returns>
