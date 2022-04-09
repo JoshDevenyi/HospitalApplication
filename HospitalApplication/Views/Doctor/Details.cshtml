@@ -1,4 +1,4 @@
-﻿@model HospitalApplication.Models.DoctorDto
+﻿@model HospitalApplication.Models.ViewModels.DetailsDoctor
 
 
 @{
@@ -10,16 +10,30 @@
 <div>
     <a href="/Doctor/List">Return to Doctor List</a>
     <br />
-    <a href="/Doctor/Edit/@Model.DoctorId">Update Doctor Details</a>
+    <a href="/Doctor/Edit/@Model.SelectedDoctor.DoctorId">Update Doctor Details</a>
     <br />
-    <a style="color:red;" href="/Doctor/DeleteConfirm/@Model.DoctorId">Delete Doctor</a>
+    <a style="color:red;" href="/Doctor/DeleteConfirm/@Model.SelectedDoctor.DoctorId">Delete Doctor</a>
     <br />
 </div>
 
-<h1>@Model.DoctorFirstName @Model.DoctorLastName</h1>
+<h1>@Model.SelectedDoctor.DoctorFirstName @Model.SelectedDoctor.DoctorLastName</h1>
 
 
 
-<p>@Model.Department</p>
-<p>@Model.DoctorEmail</p>
-<p>@Model.DoctorPhone</p>
+<p>@Model.SelectedDoctor.Department</p>
+<p>@Model.SelectedDoctor.DoctorEmail</p>
+<p>@Model.SelectedDoctor.DoctorPhone</p>
+
+<div>
+
+    <h3>Upcoming Procedures</h3>
+    <ul>
+        @foreach (var procedure in Model.RelatedProcedures)
+        {
+            <li>
+                <a href="/Procedure/Details/@procedure.ProcedureId">@procedure.ProcedureName</a>
+            </li>
+        }
+    </ul>
+
+</div>
