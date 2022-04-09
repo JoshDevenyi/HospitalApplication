@@ -64,7 +64,7 @@ namespace HospitalApplication.Controllers
         [HttpGet]
         public IEnumerable<ProcedureDto> ListProceduresForDoctor(int id)
         {
-            List<Procedure> Procedures = db.Procedures.Where(p => p.ProcedureDoctor == id).ToList();
+            List<Procedure> Procedures = db.Procedures.Where(p=>p.ProcedureDoctor==id).ToList();
             List<ProcedureDto> ProcedureDtos = new List<ProcedureDto>();
 
             Procedures.ForEach(p => ProcedureDtos.Add(new ProcedureDto()
@@ -99,7 +99,7 @@ namespace HospitalApplication.Controllers
         [HttpGet]
         public IEnumerable<ProcedureDto> ListProceduresForPatient(int id)
         {
-            List<Procedure> Procedures = db.Procedures.Where(p=>p.ProcedurePatient==id).ToList();
+            List<Procedure> Procedures = db.Procedures.Where(p => p.ProcedurePatient == id).ToList();
             List<ProcedureDto> ProcedureDtos = new List<ProcedureDto>();
 
             Procedures.ForEach(p => ProcedureDtos.Add(new ProcedureDto()
