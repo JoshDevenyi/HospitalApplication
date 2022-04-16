@@ -61,17 +61,17 @@
                 {
                     selected = "selected";
                 }
-                <option value="@room.RoomId"@selected>Room @room.RoomNumber - @room.RoomPurpose</option>
+                <option value="@room.RoomId" @selected>Room @room.RoomNumber - @room.RoomPurpose</option>
             }
         </select>
     </div>
     <div>
-        <label>Date:</label>
-        <input type="date" name="Date" value="@Model.SelectedProcedure.Date" />
+        <label>Time:</label>
+        <input type="time" name="Time" value="@Model.SelectedProcedure.Time.ToString("HH:mm")" />
     </div>
     <div>
-        <label>Time:</label>
-        <input type="time" name="Time" value="@Model.SelectedProcedure.Time" />
+        <label>Date:</label>
+        <input type="date" name="Date" value="@Model.SelectedProcedure.Date.ToString("d")" />
     </div>
     <div class="submit-container">
         <input type="submit" value="Update Procedure" />
