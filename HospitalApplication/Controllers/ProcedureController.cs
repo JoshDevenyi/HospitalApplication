@@ -121,8 +121,10 @@ namespace HospitalApplication.Controllers
 
         // POST: Procedure/Create
         [HttpPost]
+        
         public ActionResult Create(Procedure procedure)
         {
+            
             GetApplicationCookie();
             //Add a new procedure to the system
 

@@ -8,10 +8,13 @@
 
 <div>
     <a href="/Patient/List">Return to Patient List</a>
+    @if (User.IsInRole("Admin"))
+    {
     <br />
     <a href="/Patient/Edit/@Model.SelectedPatient.PatientId">Update Patient Details</a>
     <br />
     <a style="color:red;" href="/Patient/DeleteConfirm/@Model.SelectedPatient.PatientId">Delete Patient</a>
+    }
 </div>
 
 <h1> @Model.SelectedPatient.PatientFirstName @Model.SelectedPatient.PatientLastName</h1>

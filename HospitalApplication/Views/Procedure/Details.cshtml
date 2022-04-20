@@ -9,10 +9,13 @@
 
 <div>
     <a href="/Procedure/List">Return to Procedure List</a>
+    @if (User.IsInRole("Admin"))
+    {
     <br />
     <a href="/Procedure/Edit/@Model.ProcedureId">Update Procedure Details</a>
     <br />
     <a style="color:red;" href="/Procedure/DeleteConfirm/@Model.ProcedureId">Delete Procedure</a>
+    }
 </div>
 
 <h1> @Model.ProcedureName</h1>

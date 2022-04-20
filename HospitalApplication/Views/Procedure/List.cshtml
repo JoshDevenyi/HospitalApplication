@@ -6,8 +6,10 @@
 
 
 <h2>List of Procedures</h2>
-
-<p><a href="/Procedure/New">Add New Procedure</a></p>
+@if (User.IsInRole("Admin"))
+{
+    <p><a href="/Procedure/New">Add New Procedure</a></p>
+}
 
 @foreach (var procedure in Model)
 {
