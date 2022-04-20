@@ -9,11 +9,16 @@
 
 <div>
     <a href="/Doctor/List">Return to Doctor List</a>
-    <br />
-    <a href="/Doctor/Edit/@Model.SelectedDoctor.DoctorId">Update Doctor Details</a>
-    <br />
-    <a style="color:red;" href="/Doctor/DeleteConfirm/@Model.SelectedDoctor.DoctorId">Delete Doctor</a>
-    <br />
+
+    @if (User.IsInRole("Admin"))
+    {
+        <br />
+        <a href="/Doctor/Edit/@Model.SelectedDoctor.DoctorId">Update Doctor Details</a>
+        <br />
+        <a style="color:red;" href="/Doctor/DeleteConfirm/@Model.SelectedDoctor.DoctorId">Delete Doctor</a>
+        <br />
+    }
+
 </div>
 
 <h1>@Model.SelectedDoctor.DoctorFirstName @Model.SelectedDoctor.DoctorLastName</h1>

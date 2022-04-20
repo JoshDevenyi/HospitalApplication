@@ -8,11 +8,18 @@
 <h2>Room Details</h2>
 
 <div>
+
     <a href="/Room/List">Return to Room List</a>
-    <br />
-    <a href="/Room/Edit/@Model.RoomId">Update Room Details</a>
-    <br />
-    <a style="color:red;" href="/Room/DeleteConfirm/@Model.RoomId">Delete Room</a>
+
+    @if (User.IsInRole("Admin"))
+    {
+        <br />
+        <a href="/Room/Edit/@Model.RoomId">Update Room Details</a>
+        <br />
+        <a style="color:red;" href="/Room/DeleteConfirm/@Model.RoomId">Delete Room</a>
+        <br />
+    }
+
 </div>
 
 <h1>Room @Model.RoomNumber</h1>
