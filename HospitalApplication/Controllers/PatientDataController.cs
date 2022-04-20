@@ -75,6 +75,8 @@ namespace HospitalApplication.Controllers
         /// </example>
         [ResponseType(typeof(void))]
         [HttpPost]
+        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IHttpActionResult UpdatePatient(int id, Patient patient)
         {
             if (!ModelState.IsValid)
@@ -124,6 +126,7 @@ namespace HospitalApplication.Controllers
         /// </example>
         [ResponseType(typeof(Patient))]
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult AddPatient(Patient patient)
         {
             if (!ModelState.IsValid)
@@ -152,6 +155,7 @@ namespace HospitalApplication.Controllers
         /// </example>
         [ResponseType(typeof(Patient))]
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult DeletePatient(int id)
         {
             Patient patient = db.Patients.Find(id);

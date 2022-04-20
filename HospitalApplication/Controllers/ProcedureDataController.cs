@@ -179,6 +179,7 @@ namespace HospitalApplication.Controllers
         /// </example>
         [ResponseType(typeof(void))]
         [HttpPost]
+        [Authorize(Roles ="Admin")]
         public IHttpActionResult UpdateProcedure(int id, Procedure procedure)
         {
             if (!ModelState.IsValid)
@@ -228,6 +229,7 @@ namespace HospitalApplication.Controllers
         /// </example>
         [ResponseType(typeof(Procedure))]
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult AddProcedure(Procedure procedure)
         {
             if (!ModelState.IsValid)
@@ -257,6 +259,7 @@ namespace HospitalApplication.Controllers
         /// </example>
         [ResponseType(typeof(Procedure))]
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult DeleteProcedure(int id)
         {
             Procedure procedure = db.Procedures.Find(id);

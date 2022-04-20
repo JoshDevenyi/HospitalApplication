@@ -18,8 +18,41 @@ namespace HospitalApplication.Controllers
 
         static PatientController()
         {
-            client = new HttpClient();
+            HttpClientHandler handler = new HttpClientHandler()
+            {
+                AllowAutoRedirect = false,
+                UseCookies = false
+            };
+            client = new HttpClient(handler);
             client.BaseAddress = new Uri("https://localhost:44353/api/");
+        }
+
+        /// <summary>
+        /// Grabs the authentication cookie sent to this controller.
+        /// For proper WebAPI authentication, you can send a post request with login credentials to the WebAPI and log the access token from the response. The controller already knows this token, so we're just passing it up the chain.
+        /// 
+        /// Here is a descriptive article which walks through the process of setting up authorization/authentication directly.
+        /// https://docs.microsoft.com/en-us/aspnet/web-api/overview/security/individual-accounts-in-web-api
+        /// </summary>
+
+        private void GetApplicationCookie()
+        {
+            string token = "";
+            //HTTP client is set up to be reused, otherwise it will exhaust server resources.
+            //This is a bit dangerous because a previously authenticated cookie could be cached for
+            //a follow-up request from someone else. Reset cookies in HTTP client before grabbing a new one.
+            client.DefaultRequestHeaders.Remove("Cookie");
+            if (!User.Identity.IsAuthenticated) return;
+
+            HttpCookie cookie = System.Web.HttpContext.Current.Request.Cookies.Get(".AspNet.ApplicationCookie");
+            if (cookie != null) token = cookie.Value;
+
+            //collect token as it is submitted to the controller
+            //use it to pass along to the WebAPI.
+            Debug.WriteLine("Token Submitted is : " + token);
+            if (token != "") client.DefaultRequestHeaders.Add("Cookie", ".AspNet.ApplicationCookie=" + token);
+
+            return;
         }
 
         // GET: Patient/List
@@ -87,6 +120,7 @@ namespace HospitalApplication.Controllers
         [HttpPost]
         public ActionResult Create(Patient patient)
         {
+            GetApplicationCookie();
             Debug.WriteLine("The json payload is: ");
 
             //add a new patient into the system using API data
@@ -124,6 +158,7 @@ namespace HospitalApplication.Controllers
         [HttpPost]
         public ActionResult Update(int id, Patient patient)
         {
+            GetApplicationCookie();
             string url = "patientdata/updatepatient/" + id;
 
             string jsonpayload = jss.Serialize(patient);
@@ -165,6 +200,7 @@ namespace HospitalApplication.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
+            GetApplicationCookie();
             string url = "patientdata/deletepatient/" + id;
 
             HttpContent content = new StringContent("");
