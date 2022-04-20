@@ -19,9 +19,48 @@ namespace HospitalApplication.Controllers
 
         static DoctorController()
         {
-            client = new HttpClient();
+
+            HttpClientHandler handler = new HttpClientHandler()
+            {
+                AllowAutoRedirect = false,
+                //cookies are manually set in RequestHeader
+                UseCookies = false
+            };
+
+            client = new HttpClient(handler);
             client.BaseAddress = new Uri("https://localhost:44353/api/");
         }
+        private void GetApplicationCookie()
+        {
+            string token = "";
+            //HTTP client is set up to be reused, otherwise it will exhaust server resources.
+            //This is a bit dangerous because a previously authenticated cookie could be cached for
+            //a follow-up request from someone else. Reset cookies in HTTP client before grabbing a new one.
+            client.DefaultRequestHeaders.Remove("Cookie");
+            if (!User.Identity.IsAuthenticated) return;
+
+            HttpCookie cookie = System.Web.HttpContext.Current.Request.Cookies.Get(".AspNet.ApplicationCookie");
+            if (cookie != null) token = cookie.Value;
+
+            //collect token as it is submitted to the controller
+            //use it to pass along to the WebApi.
+            Debug.WriteLine("Token Submitted is : " + token);
+            if (token != "") client.DefaultRequestHeaders.Add("Cookie", ".AspNet.ApplicationCookie=" + token);
+
+            return;
+        }
+
+
+        /// <summary>
+        /// Grabs the authentication cookie sent to this controller.
+        /// For proper WebAPI authentication, you can send a post request with login credentials to the WebAPI and log the access token from the response. The controller already knows this token, so we're just passing it up the chain.
+        /// 
+        /// Here is a descriptive article which walks through the process of setting up authorization/authentication directly.
+        /// https://docs.microsoft.com/en-us/aspnet/web-api/overview/security/individual-accounts-in-web-api
+        /// </summary>
+
+
+
 
         // GET: Doctor/List
         public ActionResult List()
@@ -96,6 +135,8 @@ namespace HospitalApplication.Controllers
         [HttpPost]
         public ActionResult Create(Doctor doctor)
         {
+            GetApplicationCookie();//get token credentials
+
             string url = "doctordata/adddoctor";
 
             string jsonpayload = jss.Serialize(doctor);
@@ -142,6 +183,9 @@ namespace HospitalApplication.Controllers
         {
             //objective: update the details of a doctor already in our system
             //curl -H "Content-Type:application/json" -d @doctor.json https://localhost:44393/api/doctordata/updatedoctor/{id}
+
+            GetApplicationCookie();//get token credentials
+
             string url = "doctordata/updatedoctor/" + id;
 
             //Converting form data into JSON object
@@ -178,6 +222,9 @@ namespace HospitalApplication.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
+
+            GetApplicationCookie();//get token credentials
+
             string url = "doctordata/deletedoctor/" + id;
 
             HttpContent content = new StringContent("");
