@@ -1,5 +1,5 @@
 # HospitalApplication
-ReadMe - Hospital Application - Dylan and Josh
+ReadMe - Hospital Application - Dylan Bednar and Josh Devenyi
 
 _The “Hospital Application” is a data management system designed for use by both hospital staff and patrons.  
 Specified admin users can log in to create new entries, as well as adjust or delete existing ones. 
